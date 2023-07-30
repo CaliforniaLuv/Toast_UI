@@ -2,7 +2,7 @@ import { ToastBox } from "./ToastBox";
 
 export const ToastContainer = () => {
   return (
-    <section className="fixed z-50 top-4 right-4 left-4 bottom-4 pointer-events-none">
+    <section className="w-full h-screen ">
       <ToastBox />
     </section>
   );
