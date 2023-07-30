@@ -1,11 +1,10 @@
 import classNames from "classnames";
 
-export const ToastItem = () => {
+export const ToastItem = ({ translateY }: { translateY: number }) => {
   return (
     <li
-      className={classNames(
-        "absolute left-0 right-0 top-0 flex justify-center pointer-events-auto"
-      )}
+      className="absolute left-0 right-0 top-0 flex justify-center pointer-events-auto"
+      style={{ transform: `translateY(${translateY}px)` }}
     >
       <div className="max-w-[400px] w-full h-[80px] flex justify-center shadow-sm rounded-xl border-border-color-dividers border-[1px]">
         <div className="w-[100%] flex border-r-[1px] p-[15px] gap-x-[8px] border-r-border-color-dividers">
@@ -30,4 +29,4 @@ export const ToastItem = () => {
   );
 };
 
-// transform: translateY(168px);
+// left: 0px; right: 0px; display: flex; position: absolute; transition: all 230ms cubic-bezier(0.21, 1.02, 0.73, 1) 0s; transform: translateY(0px); top: 0px; justify-content: center;
