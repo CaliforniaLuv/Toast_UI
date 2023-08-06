@@ -1,9 +1,41 @@
 import classNames from "classnames";
+import { useEffect, useState } from "react";
 
-export const ToastItem = ({ translateY }: { translateY: number }) => {
+interface ToastBox {
+  id: number;
+  translateY: number;
+  onToastRemove: (vlaue: number) => void;
+}
+
+type ShowToastList = {
+  id: number;
+  message: string;
+  timestamp: string;
+};
+
+export const ToastItem = ({ id, translateY, onToastRemove }: ToastBox) => {
+  const [visible, setVisible] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      // 5초 후에 컴포넌트를 제거합니다.
+      setVisible(false);
+      setTimeout(() => {
+        onToastRemove(id);
+      }, 500);
+    }, 5000);
+
+    // 컴포넌트가 언마운트 될 때 clearTimeout을 호출하여 메모리 누수를 방지합니다.
+    return () => clearTimeout(timer);
+  }, [id, onToastRemove]);
+
   return (
     <li
-      className="absolute left-0 right-0 top-0 flex justify-center pointer-events-auto"
+      className={classNames(
+        "absolute left-0 right-0 top-0 flex justify-center pointer-events-auto transition-opacity duration-500",
+        { "opacity-100": visible },
+        { "opacity-0": !visible }
+      )}
       style={{ transform: `translateY(${translateY}px)` }}
     >
       <div className="max-w-[400px] w-full h-[80px] flex justify-center shadow-sm rounded-xl border-border-color-dividers border-[1px]">
